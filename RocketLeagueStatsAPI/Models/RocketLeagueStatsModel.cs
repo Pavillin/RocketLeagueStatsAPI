@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using RocketLeagueStatsAPI.Models;
 
 namespace RocketLeagueStatsAPI.Models
 {
@@ -14,5 +15,6 @@ namespace RocketLeagueStatsAPI.Models
         }
 
         public DbSet<team> teams { get; set; }
+        public DbSet<player> players { get; set; }
     }
 }

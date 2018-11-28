@@ -11,53 +11,53 @@ namespace RocketLeagueStatsAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class teamsController : ControllerBase
+    public class playersController : ControllerBase
     {
         // db
         private RocketLeagueStatsModel db;
 
-        public teamsController(RocketLeagueStatsModel db)
+        public playersController(RocketLeagueStatsModel db)
         {
             this.db = db;
         }
 
-        // GET: api/teams
+        // GET: api/players
         [HttpGet]
-        public IEnumerable<team> Get()
+        public IEnumerable<player> Get()
         {
-            return db.teams;
+            return db.players;
         }
 
-        // GET: api/teams/4
+        // GET: api/players/4
         [HttpGet("{id}")]
         public ActionResult Get(int id)
         {
-            team team = db.teams.SingleOrDefault(a => a.teamid == id);
+            player player = db.players.SingleOrDefault(a => a.playerid == id);
 
-            if (team == null)
+            if (player == null)
             {
                 return NotFound();
             }
-            return Ok(team);
+            return Ok(player);
         }
 
-        // POST: api/teams
+        // POST: api/players
         [HttpPost]
-        public ActionResult Post([FromBody] team team)
+        public ActionResult Post([FromBody] player player)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.teams.Add(team);
+            db.players.Add(player);
             db.SaveChanges();
-            return CreatedAtAction("Post", new { id = team.teamid });
+            return CreatedAtAction("Post", new { id = player.playerid });
         }
 
-        // PUT: api/teams/5
+        // PUT: api/players/5
         [HttpPut("{id}")]
-        public ActionResult Put(int id, [FromBody] team team)
+        public ActionResult Put(int id, [FromBody] player player)
         {
 
             if (!ModelState.IsValid)
@@ -65,23 +65,23 @@ namespace RocketLeagueStatsAPI.Controllers
                 return BadRequest(ModelState);
             }
 
-            db.Entry(team).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            db.Entry(player).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
             db.SaveChanges();
-            return AcceptedAtAction("Put", team);
+            return AcceptedAtAction("Put", player);
         }
 
-        // DELETE: api/teams/5
+        // DELETE: api/players/5
         [HttpDelete("{id}")]
         public ActionResult Delete(int id)
         {
-            team team = db.teams.SingleOrDefault(a => a.teamid == id);
+            player player = db.players.SingleOrDefault(a => a.playerid == id);
 
-            if (team == null)
+            if (player == null)
             {
                 return NotFound();
             }
 
-            db.teams.Remove(team);
+            db.players.Remove(player);
             db.SaveChanges();
             return Ok();
         }
