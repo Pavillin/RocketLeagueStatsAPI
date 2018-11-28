@@ -12,5 +12,7 @@ namespace RocketLeagueStatsAPI.Models
         {
 
         }
+
+        public DbSet<team> teams { get; set; }
     }
 }
